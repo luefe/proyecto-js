@@ -50,6 +50,7 @@ function calificarLibro () {
     return (libroNombre)
 }
 
+//prueba:
 libroNombre=calificarLibro
 
 const promediarLibro = () => {
