@@ -1,19 +1,38 @@
-alert('¡HOLA!');
+//alert('¡HOLA!');
 
 
 let opcionElegida;
 let datoInvalido = true;
 const categoriasLibros = ['Trama y argumento.', 'Escritura/diálogos.', 'Desarrollo de personajes.', 'Originalidad/creatividad.', 'Final']
 const categoriasPeliculas = ['Trama y argumento', 'Actuaciones', 'Diálogos', 'Desarrollo de personajes', 'Fotografía', 'Banda sonora', 'Originalidad/creatividad', 'Final']
+const puntuaciones = [0, 1, 2, 3, 4, 5];
+
+//OBJETOS LIBROS Y PELÍCULAS, hacer dsp array de cada objeto para poder tabular
+
+const libros = [];
+const peliculas = [];
+
+const libro = {
+    nombre: '',
+    genero: '',
+    puntuacion:'',
+
+};
+const pelicula = {
+    nombre: '',
+    genero: '',
+    puntuacion:'',
+};
+
+
 
 let libroNombre 
-/*let generoP = prompt('Género.');*/ //Para más adelante
+//let generoP = prompt('Género.');
 let a 
 let b 
 let c 
 let d 
 let e 
-const libros = []
 let puntajeLibro
 
 
@@ -42,18 +61,20 @@ function calificar(pregunta) {
 
 function calificarLibro () {
     libroNombre = prompt('Nombre del libro.');
+    
     a = calificar(categoriasLibros[0]);
     b = calificar(categoriasLibros[1]);
     c = calificar(categoriasLibros[2]);
     d = calificar(categoriasLibros[3]);
     e = calificar(categoriasLibros[4]);
-    return (libroNombre)
+    return (`${libroNombre}`)
+   
 }
 
-//prueba:
-libroNombre=calificarLibro
+
 
 const promediarLibro = () => {
+
     return ((a + b + c + d + e) / 5);
 }
 
@@ -61,9 +82,13 @@ const anadirLibros = () => {
     const libro = { libro: libroNombre, puntaje: puntajeLibro }
     libros.push(libro)
 }
+function mostrarLibros (){
+for (let i = 0; i<libros.length;  i++){
+    let mostrarLibro = `Libro: ${libros[i].libro}.\n Puntaje: ${libros[i].puntaje}`;
+    console.log(mostrarLibro);
+}
+}
 
-
-console.log(libros)
 
 
 
@@ -72,7 +97,8 @@ while (datoInvalido) {
 
     if (opcionElegida == 1) {
         datoInvalido = true;
-
+        console.table(libros)
+        
         alert(`Tus libros: \n ${libros}`); //acá van a ir enlistados y ordenados por promedio creciente los libros ya calificados, con su respectivo género y puntaje
     } else if (opcionElegida == 2) {
         datoInvalido = true;
@@ -84,8 +110,9 @@ while (datoInvalido) {
         puntajeLibro = promediarLibro();
         
         alert(`La calificacion final de ${libroNombre} es de ${puntajeLibro} estrellas`);
-        libroNombre = calificarLibro;
+        
         anadirLibros()
+        mostrarLibros()
 
     } else if (opcionElegida == 4) {
         datoInvalido = true;
