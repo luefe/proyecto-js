@@ -6,28 +6,13 @@ let datoInvalido = true;
 const categoriasLibros = ['Trama y argumento.', 'Escritura/diálogos.', 'Desarrollo de personajes.', 'Originalidad/creatividad.', 'Final']
 const categoriasPeliculas = ['Trama y argumento', 'Actuaciones', 'Diálogos', 'Desarrollo de personajes', 'Fotografía', 'Banda sonora', 'Originalidad/creatividad', 'Final']
 const puntuaciones = [0, 1, 2, 3, 4, 5];
-
-//OBJETOS LIBROS Y PELÍCULAS, hacer dsp array de cada objeto para poder tabular
-
+const generos = [];
 const libros = [];
 const peliculas = [];
 
-const libro = {
-    nombre: '',
-    genero: '',
-    puntuacion:'',
-
-};
-const pelicula = {
-    nombre: '',
-    genero: '',
-    puntuacion:'',
-};
-
-
 
 let libroNombre 
-//let generoP = prompt('Género.');
+let libroGenero
 let a 
 let b 
 let c 
@@ -61,7 +46,7 @@ function calificar(pregunta) {
 
 function calificarLibro () {
     libroNombre = prompt('Nombre del libro.');
-    
+    libroGenero = prompt('Género.');
     a = calificar(categoriasLibros[0]);
     b = calificar(categoriasLibros[1]);
     c = calificar(categoriasLibros[2]);
@@ -71,20 +56,19 @@ function calificarLibro () {
    
 }
 
-
-
 const promediarLibro = () => {
 
     return ((a + b + c + d + e) / 5);
 }
 
 const anadirLibros = () => {
-    const libro = { libro: libroNombre, puntaje: puntajeLibro }
+    const libro = { libro: libroNombre, puntaje: puntajeLibro, genero: libroGenero}
     libros.push(libro)
 }
+
 function mostrarLibros (){
 for (let i = 0; i<libros.length;  i++){
-    let mostrarLibro = `Libro: ${libros[i].libro}.\n Puntaje: ${libros[i].puntaje}`;
+    let mostrarLibro = `Libro: ${libros[i].libro}.\n Puntaje: ${libros[i].puntaje}. Género: ${libros[i].genero}`;
     console.log(mostrarLibro);
 }
 }
@@ -92,14 +76,15 @@ for (let i = 0; i<libros.length;  i++){
 
 
 
+
 while (datoInvalido) {
     opcionElegida = prompt("¿Qué deseas hacer? \n 1. Ver mis libros \n 2. Ver mis películas. \n 3. Calificar nuevo libro. \n 4. Calificar nueva pelíula.");
 
-    if (opcionElegida == 1) {
+    if (opcionElegida == 1) {//acá van a ir enlistados y ordenados por promedio creciente los libros ya calificados, con su respectivo género y puntaje
         datoInvalido = true;
         console.table(libros)
         
-        alert(`Tus libros: \n ${libros}`); //acá van a ir enlistados y ordenados por promedio creciente los libros ya calificados, con su respectivo género y puntaje
+        alert(`Tus libros: \n ${libros}`); 
     } else if (opcionElegida == 2) {
         datoInvalido = true;
         alert('Tus películas:');//idem "tus libros"
