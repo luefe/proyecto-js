@@ -11,12 +11,12 @@ const libros = [];
 const peliculas = [];
 
 
-let libroNombre
-let libroGenero
-let calificacion
+let libroNombre= '';
+let libroGenero= '';
+let calificacion=0
 let calificaciones = [];
 let suma = 0
-let puntajeLibro
+let puntajeLibro= 0
 
 function calificar(pregunta) {
 
@@ -39,18 +39,14 @@ function calificar(pregunta) {
 }
 
 
-
 function calificarLibro() {
     libroNombre = prompt('Nombre del libro.');
     libroGenero = prompt('Género.');
     for (let i=0; i < categoriasLibros.length; i++){
         calificacion= calificar(categoriasLibros[i]);
         calificaciones.push(calificacion);
-    suma += calificacion
-    
+    suma += calificacion;
     };
-    console.log(calificaciones)
-    console.log(suma)
     return (`${libroNombre}`)
 
 }
@@ -86,20 +82,19 @@ while (datoInvalido) {
 
     if (opcionElegida == 1) {//acá van a ir enlistados y ordenados por promedio creciente los libros ya calificados, con su respectivo género y puntaje
         datoInvalido = true;
+        
         console.table(libros)
         mostrarLibros()
-        
     } else if (opcionElegida == 2) {
         datoInvalido = true;
+        
         alert('Tus películas:');//idem "tus libros"
     } else if (opcionElegida == 3) {
-        datoInvalido = true;
-        calificarLibro();
-
+       datoInvalido = true;
+        
+       calificarLibro();
         puntajeLibro = promediarLibro();
-
         alert(`La calificacion final de ${libroNombre} es de ${puntajeLibro} estrellas`);
-
         anadirLibros()
         almacenarLibros()
 
