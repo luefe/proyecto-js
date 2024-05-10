@@ -13,13 +13,10 @@ const peliculas = [];
 
 let libroNombre
 let libroGenero
-let a
-let b
-let c
-let d
-let e
+let calificacion
+let calificaciones = [];
+let suma = 0
 let puntajeLibro
-
 
 function calificar(pregunta) {
 
@@ -29,7 +26,6 @@ function calificar(pregunta) {
         let pregNro = parseInt(preg);
         if (pregNro >= 0 && pregNro <= 5) {
             datoInvalido == true;
-            console.log(pregNro);
             return pregNro;
         } else if (isNaN(pregNro) || preg != Number || preg == null) {
             datoInvalido = confirm('Por favor, ingrese una opción válida (número entre 0 y 5) o presiona "Cancelar" para salir.')
@@ -47,18 +43,20 @@ function calificar(pregunta) {
 function calificarLibro() {
     libroNombre = prompt('Nombre del libro.');
     libroGenero = prompt('Género.');
-    a = calificar(categoriasLibros[0]);
-    b = calificar(categoriasLibros[1]);
-    c = calificar(categoriasLibros[2]);
-    d = calificar(categoriasLibros[3]);
-    e = calificar(categoriasLibros[4]);
+    for (let i=0; i < categoriasLibros.length; i++){
+        calificacion= calificar(categoriasLibros[i]);
+        calificaciones.push(calificacion);
+    suma += calificacion
+    
+    };
+    console.log(calificaciones)
+    console.log(suma)
     return (`${libroNombre}`)
 
 }
 
-const promediarLibro = () => {
-
-    return ((a + b + c + d + e) / 5);
+const promediarLibro = () => {   
+    return (suma/calificaciones.length);
 }
 
 const anadirLibros = () => {
@@ -90,7 +88,7 @@ while (datoInvalido) {
         datoInvalido = true;
         console.table(libros)
         mostrarLibros()
-        almacenarLibros()
+        
     } else if (opcionElegida == 2) {
         datoInvalido = true;
         alert('Tus películas:');//idem "tus libros"
