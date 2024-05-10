@@ -11,13 +11,13 @@ const libros = [];
 const peliculas = [];
 
 
-let libroNombre 
+let libroNombre
 let libroGenero
-let a 
-let b 
-let c 
-let d 
-let e 
+let a
+let b
+let c
+let d
+let e
 let puntajeLibro
 
 
@@ -44,7 +44,7 @@ function calificar(pregunta) {
 
 
 
-function calificarLibro () {
+function calificarLibro() {
     libroNombre = prompt('Nombre del libro.');
     libroGenero = prompt('Género.');
     a = calificar(categoriasLibros[0]);
@@ -53,7 +53,7 @@ function calificarLibro () {
     d = calificar(categoriasLibros[3]);
     e = calificar(categoriasLibros[4]);
     return (`${libroNombre}`)
-   
+
 }
 
 const promediarLibro = () => {
@@ -62,19 +62,25 @@ const promediarLibro = () => {
 }
 
 const anadirLibros = () => {
-    const libro = { libro: libroNombre, puntaje: puntajeLibro, genero: libroGenero}
+    const libro = { libro: libroNombre, genero: libroGenero, puntaje: puntajeLibro }
     libros.push(libro)
 }
 
-function mostrarLibros (){
-for (let i = 0; i<libros.length;  i++){
-    let mostrarLibro = `Libro: ${libros[i].libro}.\n Puntaje: ${libros[i].puntaje}. Género: ${libros[i].genero}`;
-    console.log(mostrarLibro);
+function mostrarLibros() {
+    for (let i = 0; i < libros.length; i++) {
+        let mostrarLibro = `Libro: ${libros[i].libro}.\n Género: ${libros[i].genero}.\n Puntaje: ${libros[i].puntaje}.`;
+        console.log(mostrarLibro);
+
+    }
+    let JSONLibro = JSON.stringify(libros)
+    alert(`Tus libros: \n ${JSONLibro}`)
 }
+
+function almacenarLibros() {
+    JSONLibro = JSON.stringify(libros)
+    localStorage.setItem('Libros', JSONLibro);
+
 }
-
-
-
 
 
 while (datoInvalido) {
@@ -83,21 +89,21 @@ while (datoInvalido) {
     if (opcionElegida == 1) {//acá van a ir enlistados y ordenados por promedio creciente los libros ya calificados, con su respectivo género y puntaje
         datoInvalido = true;
         console.table(libros)
-        
-        alert(`Tus libros: \n ${libros}`); 
+        mostrarLibros()
+        almacenarLibros()
     } else if (opcionElegida == 2) {
         datoInvalido = true;
         alert('Tus películas:');//idem "tus libros"
     } else if (opcionElegida == 3) {
         datoInvalido = true;
         calificarLibro();
-        
+
         puntajeLibro = promediarLibro();
-        
+
         alert(`La calificacion final de ${libroNombre} es de ${puntajeLibro} estrellas`);
-        
+
         anadirLibros()
-        mostrarLibros()
+        almacenarLibros()
 
     } else if (opcionElegida == 4) {
         datoInvalido = true;
