@@ -1,0 +1,72 @@
+body {
+    background-color: rgb(212, 228, 221);
+}
+
+#contenedorPrincipal {
+    height: 600px;
+    margin: 0 300px 0 300px;
+    display: flex;
+    
+}
+
+.interior {
+    background-color: rgb(163, 213, 228);
+    height: 50%;
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8%;
+    box-shadow: 3px 3px 3px rgb(160, 183, 191);
+   
+}
+
+.interior:hover {
+    scale: 1.05;
+    box-shadow: none;
+    background-color: rgb(195, 234, 246);
+}
+
+.div {
+    width: 50%;
+}
+
+#contenedorFormLibro{
+    width: 500px;
+    background-color:  rgb(218, 167, 236);
+    border-radius: 10%;
+    padding: 30px;
+    position: fixed;
+    top: 70px; 
+    left: 500px;
+    z-index: 10;
+}
+
+.none {
+    display: none;
+}
+
+#formLibro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input {
+    width: 200px;
+}
+
+.inputLibro {
+    width: 200px;
+}
+
+#librosLista{
+    width: 500px;
+    background-color:  rgb(183, 164, 190);
+    border-radius: 10%;
+    padding: 30px;
+    position: fixed;
+    top: 70px; 
+    left: 500px;
+    z-index: 10;
+}

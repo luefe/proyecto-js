@@ -1,18 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+   
     <title>Document</title>
 </head>
+
 <body>
 
-    <strong>Ranking personal de libros y películas. </strong> <br>
-    ¡Bienvenidx!
+    <h1><strong>Ranking personal de libros y películas. </strong></h1>
+    <div id="contenedorPrincipal">
 
+        <div class="div">
+            <div class="interior verLibros">
+                <h2 class="">VER LIBROS</h2>
+            </div>
+            <div class="interior puntuarLibro">
+                <h2>AÑADIR LIBRO</h2>
+            </div>
+        </div>
 
+        <div class="div">
+            <div class="interior verPeliculas">
+                <h2>VER PELÍCULAS</h2>
+            </div>
+            <div class="interior puntuarPelicula">
+                <h2>AÑADIR PELÍCULA</h2>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="contenedorFormLibro" class="none">
+        <form action="" id="formLibro">
+            <h3 >Nombre del libro.</h3>
+            <input id="nombreLibro" class="input" type="text" placeholder="Ejemplo: Don Quijote">
+            <h3 >Género.</h3>
+            <input id="generoLibro" class="input" type="text" placeholder="Ejemplo: Ciencia ficción">
+            <h3 class="preguntaLibro">Preg1</h3>
+            <h4 class="inputValue">0</h4>
+            <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
+            <h3>Preg2</h3>
+            <h4 class="inputValue">0</h4>
+            <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
+            <h3>Preg3</h3>
+            <h4 class="inputValue">0</h4>
+            <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
+            <h3>Preg4</h3>
+            <h4 class="inputValue">0</h4>
+            <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
+            <h3>Preg5</h3>
+            <h4 class="inputValue">0</h4>
+            <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
+            <button id="btnGuardar">GUARDAR</button>
+            
+        </form>
+    </div>
+
+    <div id="librosLista" class="none">
+        <h2>MIS LIBROS</h2>
+        <p id="librosPuntuados">
+
+        </p>
+        <button id="btnSalir">SALIR</button>
+    </div>
 
     <script src="preentrega2.js"></script>
 </body>
-</html>
 
+</html>
