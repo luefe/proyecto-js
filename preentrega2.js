@@ -1,3 +1,6 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+
 const verLibros = document.querySelector('.verLibros');
 const puntuarLibro = document.querySelector('.puntuarLibro');
 const inputLibro = document.getElementsByClassName('inputLibro')
@@ -38,6 +41,8 @@ function cargarLocalStorage() {
     }
 }
 
+
+
 //Guardar cada libro
 function guardarLibro(libro) {
     calificaciones.push(libro);
@@ -45,7 +50,7 @@ function guardarLibro(libro) {
 
 // Función para mostrar los libros puntuados en la tabla
 const mostrarLibros= function() {
-
+    cargarLocalStorage();
     calificaciones.forEach(libro => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -127,6 +132,7 @@ for (let i = 0; i < inputLibro.length; i++) {
 btnSalir.addEventListener('click', ()=>{
     librosLista.classList.add('none')
 })
+});
 
 /*IMPLEMENTACIONES PRÓXIMAS */
 
