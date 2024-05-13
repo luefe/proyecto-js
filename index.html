@@ -40,34 +40,44 @@
     <div id="contenedorFormLibro" class="none">
         <form action="" id="formLibro">
             <h3 >Nombre del libro.</h3>
-            <input id="nombreLibro" class="input" type="text" placeholder="Ejemplo: Don Quijote">
+            <input id="nombreLibro" class="input" type="text" placeholder="Ejemplo: Rayuela">
             <h3 >Género.</h3>
-            <input id="generoLibro" class="input" type="text" placeholder="Ejemplo: Ciencia ficción">
-            <h3 class="preguntaLibro">Preg1</h3>
+            <input id="generoLibro" class="input" type="text" placeholder="Ejemplo: Novela">
+            <h3 class="preguntaLibro">Trama y argumento.</h3>
             <h4 class="inputValue">0</h4>
             <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
-            <h3>Preg2</h3>
+            <h3>Escritura/diálogos.</h3>
             <h4 class="inputValue">0</h4>
             <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
-            <h3>Preg3</h3>
+            <h3>Desarrollo de personajes.</h3>
             <h4 class="inputValue">0</h4>
             <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
-            <h3>Preg4</h3>
+            <h3>Originalidad/creatividad.</h3>
             <h4 class="inputValue">0</h4>
             <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
-            <h3>Preg5</h3>
+            <h3>Final.</h3>
             <h4 class="inputValue">0</h4>
             <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
             <button id="btnGuardar">GUARDAR</button>
+            <button >SALIR</button>
             
         </form>
     </div>
 
     <div id="librosLista" class="none">
         <h2>MIS LIBROS</h2>
-        <p id="librosPuntuados">
-
-        </p>
+        <table id="tablaLibros">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Género</th>
+                    <th>Puntaje Promedio</th>
+                </tr>
+            </thead>
+            <tbody id="librosPuntuados">
+                <!-- Aquí se llenará dinámicamente con los libros puntuados -->
+            </tbody>
+        </table>
         <button id="btnSalir">SALIR</button>
     </div>
 
