@@ -41,8 +41,6 @@ function cargarLocalStorage() {
     }
 }
 
-
-
 //Guardar cada libro
 function guardarLibro(libro) {
     calificaciones.push(libro);
@@ -118,15 +116,6 @@ btnGuardar.addEventListener('click', ()=>{
     guardarLibro(nuevoLibro);
     mostrarLibros()
 })
-
-
-
-//Va mostrando el valor de input ingresado
-for (let i = 0; i < inputLibro.length; i++) {
-    inputLibro[i].addEventListener('input', () => {
-        inputValue[i].innerHTML = inputLibro[i].value;
-    })
-}
 
 //Botón salir
 btnSalir.addEventListener('click', ()=>{
