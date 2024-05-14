@@ -29,24 +29,22 @@ class Libro {
 }
 
 //funciones de storage
-function guardarLocalStorage() {
-    localStorage.setItem('librosPuntuados', JSON.stringify(calificaciones));
-}
-
 function cargarLocalStorage() {
     const librosGuardados = localStorage.getItem('librosPuntuados');
     if (librosGuardados) {
         calificaciones = JSON.parse(librosGuardados);
-        mostrarLibros();
+        
     }
+}
+
+function guardarLocalStorage() {
+    localStorage.setItem('librosPuntuados', JSON.stringify(calificaciones));
 }
 
 //Guardar cada libro
 function guardarLibro(libro) {
     calificaciones.push(libro);
 }
-
-
 
 // Función para mostrar los libros puntuados en la tabla
 const mostrarLibros= function() {
@@ -80,12 +78,6 @@ puntuarLibro.addEventListener('click', () => {
     contenedorFormLibro.classList.remove('none');
     librosLista.classList.add('none');
 });
-
-//Hace que aparezca el formulario al clickear en "AÑADIR LIBROS"
-puntuarLibro.addEventListener ('click', ()=>{
-    contenedorFormLibro.classList.remove('none')
-    librosLista.classList.add('none')
-})
 
 //Muestra los libros al clickear en "VER LIBROS"
 verLibros.addEventListener ('click', ()=>{
@@ -140,3 +132,4 @@ btnSalir.addEventListener('click', ()=>{
 //Que se puedan remover libros o modificar
 //Resetear valores predeterminados del form al guardar
 //Agregar animaciones, dinamimsmo, suavizar las transiciones
+//Cambiar input range por estrellas u otro ícono (como libritos y claquetas)
