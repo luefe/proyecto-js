@@ -50,7 +50,7 @@ function guardarLibro(libro) {
 
 // Función para mostrar los libros puntuados en la tabla
 const mostrarLibros= function() {
-    
+    cargarLocalStorage();
     calificaciones.forEach(libro => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -132,3 +132,11 @@ btnSalir.addEventListener('click', ()=>{
 //Hacer la parte de películas
 //Añadir función de remover libros de la tabla
 //Mejorar estilos
+//Mostrar el promedio antes o después de guardar
+//Clasificar por género
+//Ordenar por promedio
+//Poner opciones de géneros en lugar de entrada de texto
+//Incorporar el toast o modal cuando se guarda un nuevo libro para decir el promedio
+//Que se puedan remover libros o modificar
+//Resetear valores predeterminados del form al guardar
+//Agregar animaciones, dinamimsmo, suavizar las transiciones
