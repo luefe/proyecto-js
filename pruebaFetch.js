@@ -47,9 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para mostrar los libros puntuados en la tabla
     function mostrarLibros() {
-        // Limpiar la tabla antes de agregar los libros
- 
-
+       
         calificaciones.forEach(libro => {
             const row = document.createElement('tr');
             row.innerHTML = `

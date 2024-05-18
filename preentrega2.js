@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-
 const verLibros = document.querySelector('.verLibros');
 const puntuarLibro = document.querySelector('.puntuarLibro');
 const inputLibro = document.getElementsByClassName('inputLibro')
@@ -47,9 +46,7 @@ function guardarLibro(libro) {
 }
 
 // Función para mostrar los libros puntuados en la tabla
-cargarLocalStorage()
 const mostrarLibros= function() {
-    
     calificaciones.forEach(libro => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -58,8 +55,7 @@ const mostrarLibros= function() {
             <td>${libro.puntaje.toFixed(2)}</td>
         `;
         librosPuntuados.appendChild(row);
-    });
-    
+    });  
 }
 
 //Va mostrando el valor de input ingresado
@@ -81,6 +77,7 @@ puntuarLibro.addEventListener('click', () => {
 
 //Muestra los libros al clickear en "VER LIBROS"
 verLibros.addEventListener ('click', ()=>{
+    mostrarLibros();
     librosLista.classList.remove('none')
     contenedorFormLibro.classList.add('none')
 
@@ -111,12 +108,16 @@ btnGuardar.addEventListener('click', ()=>{
     guardarLibro(nuevoLibro);
     mostrarLibros()
 })
-guardarLocalStorage()
 
 //Botón salir
 btnSalir.addEventListener('click', ()=>{
     librosLista.classList.add('none')
 })
+
+// Inicialización
+cargarLocalStorage();
+mostrarLibros();
+
 });
 
 /*IMPLEMENTACIONES PRÓXIMAS */
