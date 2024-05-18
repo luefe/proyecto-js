@@ -47,6 +47,7 @@ function guardarLibro(libro) {
 
 // Función para mostrar los libros puntuados en la tabla
 const mostrarLibros= function() {
+    tablaLibros.innerHTML = '';
     calificaciones.forEach(libro => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -106,7 +107,7 @@ btnGuardar.addEventListener('click', ()=>{
 
     const nuevoLibro = new Libro(nombre, genero, puntajePromedio);
     guardarLibro(nuevoLibro);
-    
+    mostrarLibros()
 })
 
 //Botón salir
