@@ -28,12 +28,11 @@ class Libro {
     }
 }
 
-//funciones de storage
+//Funciones de storage
 function cargarLocalStorage() {
     const librosGuardados = localStorage.getItem('librosPuntuados');
     if (librosGuardados) {
         calificaciones = JSON.parse(librosGuardados);
-        
     }
 }
 
@@ -44,11 +43,13 @@ function guardarLocalStorage() {
 //Guardar cada libro
 function guardarLibro(libro) {
     calificaciones.push(libro);
+    guardarLocalStorage();
 }
 
 // Función para mostrar los libros puntuados en la tabla
+cargarLocalStorage()
 const mostrarLibros= function() {
-    cargarLocalStorage();
+    
     calificaciones.forEach(libro => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -58,7 +59,6 @@ const mostrarLibros= function() {
         `;
         librosPuntuados.appendChild(row);
     });
-    guardarLocalStorage();
     
 }
 
@@ -111,6 +111,7 @@ btnGuardar.addEventListener('click', ()=>{
     guardarLibro(nuevoLibro);
     mostrarLibros()
 })
+guardarLocalStorage()
 
 //Botón salir
 btnSalir.addEventListener('click', ()=>{
