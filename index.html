@@ -16,7 +16,6 @@
 
     <h1><strong>Ranking personal de libros y películas. </strong></h1>
     <div id="contenedorPrincipal">
-        ABCD
         <div class="div">
             <div class="interior verLibros">
                 <h2 class="">VER LIBROS</h2>
@@ -41,9 +40,9 @@
     <div id="contenedorFormLibro" class="none">
         <form action="" id="formLibro">
             <h3 >Nombre del libro.</h3>
-            <input id="nombreLibro" class="input" type="text" placeholder="Ejemplo: Rayuela">
+            <input id="nombreLibro" class="input" type="text" placeholder="Ejemplo: Rayuela" required >
             <h3 >Género.</h3>
-            <input id="generoLibro" class="input" type="text" placeholder="Ejemplo: Novela">
+            <input id="generoLibro" class="input" type="text" placeholder="Ejemplo: Novela" required>
             <h3 class="preguntaLibro">Trama y argumento.</h3>
             <h4 class="inputValue">0</h4>
             <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
@@ -59,7 +58,7 @@
             <h3>Final.</h3>
             <h4 class="inputValue">0</h4>
             <input type="range" min="0" max="5" step="1" value="0" class="inputLibro">
-            <button id="btnGuardar">GUARDAR</button>
+            <input type="submit" value="GUARDAR" id="btnGuardar">
             <button >SALIR</button>
             
         </form>
@@ -82,7 +81,7 @@
         <button id="btnSalir">SALIR</button>
     </div>
 
-    <script src="preentrega2.js"></script>
+    <script src="pruebaFetch.js"></script>
 </body>
 
 </html>

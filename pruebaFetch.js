@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const puntuarLibro = document.querySelector('.puntuarLibro');
     const inputLibro = document.getElementsByClassName('inputLibro');
     const formLibro = document.getElementById('formLibro');
-    let inputValue = document.getElementsByClassName('inputValue');
+    const inputValue = document.getElementsByClassName('inputValue');
     const contenedorFormLibro = document.getElementById('contenedorFormLibro');
     const librosLista = document.getElementById('librosLista');
     const btnGuardar = document.getElementById('btnGuardar');
     const btnSalir = document.getElementById('btnSalir');
-    let nombreLibro = document.getElementById('nombreLibro');
-    let generoLibro = document.getElementById('generoLibro');
-    let tablaLibros = document.getElementById('librosPuntuados'); // Corregido id de la tabla
+    const nombreLibro = document.getElementById('nombreLibro');
+    const generoLibro = document.getElementById('generoLibro');
+    const tablaLibros = document.getElementById('tablaLibros');
 
     let calificaciones = [];
     let suma = 0;
@@ -46,10 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Función para mostrar los libros puntuados en la tabla
-    function mostrarLibros() {
-        // Limpiar la tabla antes de agregar los libros
-        tablaLibros.innerHTML = ''; 
-
+    const mostrarLibros = function() {
+        // Limpiar la tabla antes de agregar nuevas filas
+        tablaLibros.innerHTML = '';
         calificaciones.forEach(libro => {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -65,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < inputLibro.length; i++) {
         inputLibro[i].addEventListener('input', () => {
             inputValue[i].innerHTML = inputLibro[i].value;
-        })
+        });
     }
 
     formLibro.addEventListener('submit', (e) => {
@@ -97,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             puntajeLibro = (suma / puntuaciones.length);
         }
 
-        calificaciones.length = 0;
         puntuaciones = []; // reinicia para futuras sumas
         suma = 0; // reinicia para futuras sumas
         const nombre = document.getElementById('nombreLibro').value;

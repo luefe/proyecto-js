@@ -48,7 +48,6 @@ function guardarLibro(libro) {
 
 // Función para mostrar los libros puntuados en la tabla
 const mostrarLibros= function() {
-    
     calificaciones.forEach(libro => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -58,8 +57,6 @@ const mostrarLibros= function() {
         `;
         librosPuntuados.appendChild(row);
     });
-    
-    
 }
 
 //Va mostrando el valor de input ingresado
@@ -116,9 +113,6 @@ btnGuardar.addEventListener('click', ()=>{
 btnSalir.addEventListener('click', ()=>{
     librosLista.classList.add('none')
 })
-
-cargarLocalStorage();
-mostrarLibros();
 });
 
 /*IMPLEMENTACIONES PRÓXIMAS */
