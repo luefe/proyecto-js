@@ -106,7 +106,7 @@ btnGuardar.addEventListener('click', ()=>{
 
     const nuevoLibro = new Libro(nombre, genero, puntajePromedio);
     guardarLibro(nuevoLibro);
-    mostrarLibros()
+    
 })
 
 //Botón salir
@@ -116,7 +116,7 @@ btnSalir.addEventListener('click', ()=>{
 
 // Inicialización
 cargarLocalStorage();
-mostrarLibros();
+
 
 });
 
