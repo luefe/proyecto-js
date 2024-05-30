@@ -40,6 +40,19 @@ body {
     top: 70px; 
     left: 500px;
     z-index: 10;
+    
+}
+
+#contenedorFormPelicula{
+    width: 500px;
+    background-color:  rgb(213, 156, 183);
+    border-radius: 10%;
+    padding: 30px;
+    position: fixed;
+    top: 70px; 
+    left: 500px;
+    z-index: 10;
+    
 }
 
 .none {
@@ -47,6 +60,12 @@ body {
 }
 
 #formLibro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#formPelicula {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,9 +79,24 @@ body {
     width: 200px;
 }
 
+.inputPelicula {
+    width: 200px;
+}
+
 #librosLista{
     width: 500px;
     background-color:  rgb(183, 164, 190);
+    border-radius: 10%;
+    padding: 30px;
+    position: fixed;
+    top: 70px; 
+    left: 500px;
+    z-index: 10;
+}
+
+#peliculasLista{
+    width: 500px;
+    background-color:  rgb(213, 156, 183);
     border-radius: 10%;
     padding: 30px;
     position: fixed;

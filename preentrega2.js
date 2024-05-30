@@ -1,132 +1,272 @@
+/* ENTREGA FINAL!!! AGREGAR 1 LIBRERÍA Y 1 FETCH */
+
 document.addEventListener('DOMContentLoaded', () => {
 
+    const verLibros = document.querySelector('.verLibros');
+    const puntuarLibro = document.querySelector('.puntuarLibro');
+    const inputLibro = document.querySelectorAll('.inputLibro');
+    const formLibro = document.getElementById('formLibro');
+    const contenedorFormLibro = document.getElementById('contenedorFormLibro');
+    const librosLista = document.getElementById('librosLista');
+    const btnGuardarL = document.getElementById('btnGuardarL');
+    const btnSalir1 = document.getElementById('btnSalir1');
+    const btnSalir2 = document.getElementById('btnSalir2');
+    const nombreL = document.getElementById('nombreLibro');
+    const generoL = document.getElementById('generoLibro');
+    const tablaLibros = document.getElementById('tablaLibros');
+    let requerido = document.getElementsByClassName('requerido')
 
-const verLibros = document.querySelector('.verLibros');
-const puntuarLibro = document.querySelector('.puntuarLibro');
-const inputLibro = document.getElementsByClassName('inputLibro')
-const formLibro = document.getElementById('formLibro');
-let inputValue = document.getElementsByClassName('inputValue');
-const contenedorFormLibro = document.getElementById('contenedorFormLibro')
-const librosLista = document.getElementById('librosLista')
-const btnGuardar = document.getElementById('btnGuardar')
-const btnSalir = document.getElementById('btnSalir')
-let nombreLibro = document.getElementById('nombreLibro')
-let generoLibro = document.getElementById('generoLibro')
-let tablaLibros = document.getElementById('tablaLibros');
+    const verPeliculas = document.querySelector('.verPeliculas');
+    const puntuarPelicula = document.querySelector('.puntuarPelicula');
+    const inputPelicula = document.querySelectorAll('.inputPelicula');
+    const formPelicula = document.getElementById('formPelicula');
+    const contenedorFormPelicula = document.getElementById('contenedorFormPelicula');
+    const peliculasLista = document.getElementById('peliculasLista');
+    const btnSalir3 = document.getElementById('btnSalir3');
+    const btnSalir4 = document.getElementById('btnSalir4');
+    const nombreP = document.getElementById('nombrePelicula');
+    const generoP = document.getElementById('generoPelicula');
+    const tablaPelicula = document.getElementById('tablaPeliculas');
+    const btnGuardarP = document.getElementById('btnGuardarP');
 
-let calificaciones = [];
-let suma = 0;
-let calificacion
-let puntajeLibro
-let puntuaciones = []
+    let calificacionesP = [];
+    let calificacionesL = [];
+    let suma = 0;
+    let calificacionP;
+    let calificacionL;
+    let puntajeL;
+    let puntajeP;
+    let puntuacionesP = [];
+    let puntuacionesL = [];
 
-class Libro {
-    constructor(nombre, genero, puntaje) {
-        this.nombre = nombre;
-        this.genero = genero;
-        this.puntaje = puntaje;
+    class Libro {
+        constructor(nombre, genero, puntaje) {
+            this.nombre = nombre;
+            this.genero = genero;
+            this.puntaje = puntaje;
+        }
     }
-}
 
-//funciones de storage
-function cargarLocalStorage() {
-    const librosGuardados = localStorage.getItem('librosPuntuados');
-    if (librosGuardados) {
-        calificaciones = JSON.parse(librosGuardados);
+    class Pelicula {
+        constructor(nombre, genero, puntaje) {
+            this.nombre = nombre;
+            this.genero = genero;
+            this.puntaje = puntaje;
+        }
     }
-}
 
-function guardarLocalStorage() {
-    localStorage.setItem('librosPuntuados', JSON.stringify(calificaciones));
-}
+    // Funciones de storage
+    function cargarLocalStorage() {
+        const librosGuardados = localStorage.getItem('librosPuntuados');
+        if (librosGuardados) {
+            calificacionesL = JSON.parse(librosGuardados);
+        }
+        const peliculasGuardadas = localStorage.getItem('peliculasPuntuadas');
+        if (peliculasGuardadas) {
+            calificacionesP = JSON.parse(peliculasGuardadas);
+        }
+    }
 
-//Guardar cada libro
-function guardarLibro(libro) {
-    calificaciones.push(libro);
-    guardarLocalStorage();
-}
+    function guardarLocalStorageL() {
+        localStorage.setItem('librosPuntuados', JSON.stringify(calificacionesL));
+    }
+    function guardarLocalStorageP() {
+        localStorage.setItem('peliculasPuntuadas', JSON.stringify(calificacionesP));
+    }
 
-// Función para mostrar los libros puntuados en la tabla
-const mostrarLibros= function() {
-    calificaciones.forEach(libro => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${libro.nombre}</td>
-            <td>${libro.genero}</td>
-            <td>${libro.puntaje.toFixed(2)}</td>
-        `;
-        librosPuntuados.appendChild(row);
+    // Guardar cada libro/pelicula
+    function guardarLibro(libro) {
+        calificacionesL.push(libro);
+        guardarLocalStorageL();
+    }
+
+    function guardarPeliculas(pelicula) {
+        calificacionesP.push(pelicula);
+        guardarLocalStorageP();
+    }
+
+    // Función para mostrar los libros puntuados en la tabla
+    const mostrarLibros = function () {
+        // Limpiar la tabla antes de agregar nuevas filas, evita duplicaciones
+        tablaLibros.innerHTML = '';
+        calificacionesL.forEach(libro => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${libro.nombre}</td>
+                <td>${libro.genero}</td>
+                <td>${libro.puntaje.toFixed(2)}</td>
+            `;
+            tablaLibros.appendChild(row);
+        });
+    }
+
+    const mostrarPeliculas = function () {
+        // Limpiar la tabla antes de agregar nuevas filas
+        tablaPelicula.innerHTML = '';
+        calificacionesP.forEach(pelicula => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${pelicula.nombre}</td>
+                <td>${pelicula.genero}</td>
+                <td>${pelicula.puntaje.toFixed(2)}</td>
+            `;
+            tablaPelicula.appendChild(row);
+        });
+    }
+
+    // Va mostrando el valor de input ingresado
+    
+    inputLibro.forEach(input => {
+        input.addEventListener('input', (event) => {
+            event.target.previousElementSibling.textContent = event.target.value;
+        });
     });
-}
 
-//Va mostrando el valor de input ingresado
-for (let i = 0; i < inputLibro.length; i++) {
-    inputLibro[i].addEventListener('input', () => {
-        inputValue[i].innerHTML = inputLibro[i].value;
-    })
-}
+    inputPelicula.forEach(input => {
+        input.addEventListener('input', (event) => {
+            event.target.previousElementSibling.textContent = event.target.value;
+        });
+    });
 
-formLibro.addEventListener('submit', (e) => {
-    e.preventDefault();  
-});
+    //Prevenir que se recargue la página al cerrar los formularios
+    formLibro.addEventListener('submit', (e) => {
+        e.preventDefault();
+    });
 
-// Mostrar formulario para añadir libros
-puntuarLibro.addEventListener('click', () => {
-    contenedorFormLibro.classList.remove('none');
-    librosLista.classList.add('none');
-});
+    formPelicula.addEventListener('submit', (e) => {
+        e.preventDefault();
+    });
 
-//Muestra los libros al clickear en "VER LIBROS"
-verLibros.addEventListener ('click', ()=>{
-    librosLista.classList.remove('none')
-    contenedorFormLibro.classList.add('none')
+    btnSalir1.addEventListener('click', (e) => {
+        e.preventDefault();
+    });
 
-})
+    btnSalir3.addEventListener('click', (e) => {
+        e.preventDefault();
+    });
 
-//Qué hacer al guardar cambios
-btnGuardar.addEventListener('click', ()=>{
-    contenedorFormLibro.classList.add('none')
+    // Mostrar formulario para añadir libros/peliculas
+    puntuarLibro.addEventListener('click', () => {
+        contenedorFormLibro.classList.remove('none');
+        librosLista.classList.add('none');
+        peliculasLista.classList.add('none');
+        contenedorFormPelicula.classList.add('none');
+    });
 
-    for (let i = 0; i < inputLibro.length; i++) {
+    puntuarPelicula.addEventListener('click', () => {
+        contenedorFormPelicula.classList.remove('none');
+        librosLista.classList.add('none');
+        peliculasLista.classList.add('none');
+        contenedorFormLibro.classList.add('none');
+    });
 
-        calificacion = parseInt(inputLibro[i].value)//para asegurar que el value sea un numero
-        puntuaciones.push(calificacion)
+    // Muestra los libros al clickear en "VER LIBROS"
+    verLibros.addEventListener('click', () => {
+        mostrarLibros(); // Mostrar los libros cargados
+        librosLista.classList.remove('none');
+        contenedorFormLibro.classList.add('none');
+        peliculasLista.classList.add('none');
+        contenedorFormPelicula.classList.add('none');
+    });
 
-        suma += calificacion;
-        puntajeLibro = (suma / puntuaciones.length)
+    verPeliculas.addEventListener('click', () => {
+        mostrarPeliculas(); // Mostrar las peliculas cargadas
+        peliculasLista.classList.remove('none');
+        librosLista.classList.add('none');
+        contenedorFormLibro.classList.add('none');
+        contenedorFormPelicula.classList.add('none');
+    });
 
-    };
+    // Qué hacer al guardar cambios
+    btnGuardarL.addEventListener('click', () => {
 
-    calificaciones.length = 0;
-    puntuaciones= []; //reinicia para futuras sumas
-    suma = 0 //reinicia para futuras sumas
-    const nombre = document.getElementById('nombreLibro').value;
-    const genero = document.getElementById('generoLibro').value;
-    const puntajePromedio = puntajeLibro
+        if (nombreL.length < 2 || generoL.length < 5) {
+            
+            requerido[0].innerHTML = '<p>Campo requerido</p>'
+        } else {
+            contenedorFormLibro.classList.add('none');
 
-    const nuevoLibro = new Libro(nombre, genero, puntajePromedio);
-    guardarLibro(nuevoLibro);
-    mostrarLibros()
-})
+            for (let i = 0; i < inputLibro.length; i++) {
+                calificacionL = parseInt(inputLibro[i].value); // para asegurar que el value sea un número
+                puntuacionesL.push(calificacionL);
 
-//Botón salir
-btnSalir.addEventListener('click', ()=>{
-    librosLista.classList.add('none')
-})
+                suma += calificacionL;
+                puntajeL = (suma / puntuacionesL.length);
+            }
+
+            puntuacionesL = []; // reinicia para futuras sumas
+            suma = 0; // reinicia para futuras sumas
+            const nombre = document.getElementById('nombreLibro').value;
+            const genero = document.getElementById('generoLibro').value;
+            const puntajePromedioL = puntajeL;
+
+            const nuevoLibro = new Libro(nombre, genero, puntajePromedioL);
+            guardarLibro(nuevoLibro);
+            mostrarLibros();
+            inputValue = 0;
+        }
+    });
+
+    btnGuardarP.addEventListener('click', () => {
+
+        if (nombreP.length < 2 || generoP.length < 5) {
+            
+            requerido[0].innerHTML = '<p>Campo requerido</p>'
+        } else {
+            contenedorFormPelicula.classList.add('none');
+
+            for (let i = 0; i < inputLibro.length; i++) {
+                calificacionP = parseInt(inputPelicula[i].value); // para asegurar que el value sea un número
+                puntuacionesP.push(calificacionP);
+
+                suma += calificacionP;
+                puntajeP = (suma / puntuacionesP.length);
+            }
+
+            puntuacionesP = []; // reinicia para futuras sumas
+            suma = 0; // reinicia para futuras sumas
+            const nombre = document.getElementById('nombrePelicula').value;
+            const genero = document.getElementById('generoPelicula').value;
+            const puntajePromedioP = puntajeP;
+
+            const nuevaPelicula = new Pelicula(nombre, genero, puntajePromedioP);
+            guardarPeliculas(nuevaPelicula);
+            mostrarPeliculas();
+            
+        }
+    });
+
+    // Botón salir
+    btnSalir1.addEventListener('click', () => {
+        contenedorFormLibro.classList.add('none');
+    });
+
+    btnSalir2.addEventListener('click', () => {
+        librosLista.classList.add('none');
+    });
+
+    btnSalir3.addEventListener('click', () => {
+        contenedorFormPelicula.classList.add('none');
+    });
+
+    btnSalir4.addEventListener('click', () => {
+        peliculasLista.classList.add('none');
+    });
+
+    // Inicialización
+    cargarLocalStorage();
+    mostrarLibros(); // Mostrar los libros después de cargarlos
 });
 
 /*IMPLEMENTACIONES PRÓXIMAS */
 
-//Validaciones en el formulario, asegurar que no se repiten nombres de libros
-//Hacer la parte de películas
-//Añadir función de remover libros de la tabla
+//Añadir función de remover libros o películas de la tabla
 //Mejorar estilos
 //Mostrar el promedio antes o después de guardar
 //Clasificar por género
 //Ordenar por promedio
 //Poner opciones de géneros en lugar de entrada de texto
 //Incorporar el toast o modal cuando se guarda un nuevo libro para decir el promedio
-//Que se puedan remover libros o modificar
 //Resetear valores predeterminados del form al guardar
 //Agregar animaciones, dinamimsmo, suavizar las transiciones
 //Cambiar input range por estrellas u otro ícono (como libritos y claquetas)
