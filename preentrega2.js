@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             requerido[0].innerHTML = '<p>Campo requerido</p>'
         } else {
-            contenedorFormLibro.classList.add('none');
+            
 
             for (let i = 0; i < inputLibro.length; i++) {
                 calificacionL = parseInt(inputLibro[i].value); // para asegurar que el value sea un número
@@ -201,9 +201,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const puntajePromedioL = puntajeL;
 
             const nuevoLibro = new Libro(nombre, genero, puntajePromedioL);
-            guardarLibro(nuevoLibro);
-            mostrarLibros();
+            
+            
             inputValue = 0;
+            Swal.fire({
+                title: `La calificación final de ${nuevoLibro.nombre} es ${nuevoLibro.puntaje} ¿Desea guardar esta película?`,
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Guardar",
+                denyButtonText: `No guardar`
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire("¡Se guardó el libro!");
+                  guardarLibro(nuevoLibro);
+                mostrarLibros();
+                contenedorFormPelicula.classList.add('none');
+                } else if (result.isDenied) {
+                  Swal.fire("No se guardó el libro");
+                  contenedorFormLibro.classList.add('none');
+                }
+              });
         }
     });
 
@@ -213,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             requerido[0].innerHTML = '<p>Campo requerido</p>'
         } else {
-            contenedorFormPelicula.classList.add('none');
+            
 
             for (let i = 0; i < inputLibro.length; i++) {
                 calificacionP = parseInt(inputPelicula[i].value); // para asegurar que el value sea un número
@@ -228,13 +245,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const nombre = document.getElementById('nombrePelicula').value;
             const genero = document.getElementById('generoPelicula').value;
             const puntajePromedioP = puntajeP;
-
             const nuevaPelicula = new Pelicula(nombre, genero, puntajePromedioP);
-            guardarPeliculas(nuevaPelicula);
-            mostrarPeliculas();
+           
+            Swal.fire({
+                title: `La calificación final de ${nuevaPelicula.nombre} es ${nuevaPelicula.puntaje} ¿Desea guardar esta película?`,
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Guardar",
+                denyButtonText: `No guardar`
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire("¡Se guardó la película!");
+                  guardarPeliculas(nuevaPelicula);
+                mostrarPeliculas();
+                contenedorFormPelicula.classList.add('none');
+                } else if (result.isDenied) {
+                  Swal.fire("No se guardó la película");
+                  contenedorFormPelicula.classList.add('none');
+                }
+              });
+
             
         }
     });
+
+
+    //PONER BOTONES DE BOOTSTRAP
 
     // Botón salir
     btnSalir1.addEventListener('click', () => {
@@ -262,11 +298,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //Añadir función de remover libros o películas de la tabla
 //Mejorar estilos
-//Mostrar el promedio antes o después de guardar
 //Clasificar por género
 //Ordenar por promedio
 //Poner opciones de géneros en lugar de entrada de texto
-//Incorporar el toast o modal cuando se guarda un nuevo libro para decir el promedio
-//Resetear valores predeterminados del form al guardar
 //Agregar animaciones, dinamimsmo, suavizar las transiciones
 //Cambiar input range por estrellas u otro ícono (como libritos y claquetas)
