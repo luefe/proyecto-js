@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const tablaPelicula = document.getElementById('tablaPeliculas');
     const btnGuardarP = document.getElementById('btnGuardarP');
 
+    const buscador = document.getElementById('buscador');
+    const coincidencias = document.getElementById('coincidencias');
+    const infoPelis = document.getElementById('infoPelis');
+
     let calificacionesP = [];
     let calificacionesL = [];
     let suma = 0;
@@ -115,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Va mostrando el valor de input ingresado
-    
+
     inputLibro.forEach(input => {
         input.addEventListener('input', (event) => {
             event.target.previousElementSibling.textContent = event.target.value;
@@ -181,10 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
     btnGuardarL.addEventListener('click', () => {
 
         if (nombreL.length < 2 || generoL.length < 5) {
-            
+
             requerido[0].innerHTML = '<p>Campo requerido</p>'
         } else {
-            
+
 
             for (let i = 0; i < inputLibro.length; i++) {
                 calificacionL = parseInt(inputLibro[i].value); // para asegurar que el value sea un número
@@ -201,8 +205,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const puntajePromedioL = puntajeL;
 
             const nuevoLibro = new Libro(nombre, genero, puntajePromedioL);
-            
-            
+
+
             inputValue = 0;
             Swal.fire({
                 title: `La calificación final de ${nuevoLibro.nombre} es ${nuevoLibro.puntaje} ¿Desea guardar esta película?`,
@@ -210,27 +214,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 showCancelButton: true,
                 confirmButtonText: "Guardar",
                 denyButtonText: `No guardar`
-              }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                  Swal.fire("¡Se guardó el libro!");
-                  guardarLibro(nuevoLibro);
-                mostrarLibros();
-                contenedorFormPelicula.classList.add('none');
+                    Swal.fire("¡Se guardó el libro!");
+                    guardarLibro(nuevoLibro);
+                    mostrarLibros();
+                    contenedorFormPelicula.classList.add('none');
                 } else if (result.isDenied) {
-                  Swal.fire("No se guardó el libro");
-                  contenedorFormLibro.classList.add('none');
+                    Swal.fire("No se guardó el libro");
+                    contenedorFormLibro.classList.add('none');
                 }
-              });
+            });
         }
     });
 
     btnGuardarP.addEventListener('click', () => {
 
         if (nombreP.length < 2 || generoP.length < 5) {
-            
+
             requerido[0].innerHTML = '<p>Campo requerido</p>'
         } else {
-            
+
 
             for (let i = 0; i < inputLibro.length; i++) {
                 calificacionP = parseInt(inputPelicula[i].value); // para asegurar que el value sea un número
@@ -246,29 +250,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const genero = document.getElementById('generoPelicula').value;
             const puntajePromedioP = puntajeP;
             const nuevaPelicula = new Pelicula(nombre, genero, puntajePromedioP);
-           
+
             Swal.fire({
                 title: `La calificación final de ${nuevaPelicula.nombre} es ${nuevaPelicula.puntaje} ¿Desea guardar esta película?`,
                 showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: "Guardar",
                 denyButtonText: `No guardar`
-              }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                  Swal.fire("¡Se guardó la película!");
-                  guardarPeliculas(nuevaPelicula);
-                mostrarPeliculas();
-                contenedorFormPelicula.classList.add('none');
+                    Swal.fire("¡Se guardó la película!");
+                    guardarPeliculas(nuevaPelicula);
+                    mostrarPeliculas();
+                    contenedorFormPelicula.classList.add('none');
                 } else if (result.isDenied) {
-                  Swal.fire("No se guardó la película");
-                  contenedorFormPelicula.classList.add('none');
+                    Swal.fire("No se guardó la película");
+                    contenedorFormPelicula.classList.add('none');
                 }
-              });
+            });
 
-            
+
         }
     });
-
 
     //PONER BOTONES DE BOOTSTRAP
 
@@ -288,6 +291,43 @@ document.addEventListener('DOMContentLoaded', () => {
     btnSalir4.addEventListener('click', () => {
         peliculasLista.classList.add('none');
     });
+
+    //BUSCADOR DE PELÍCULAS
+
+    buscador.addEventListener('input', async () => {
+        const peticion = buscador.value;
+        const response = await fetch(`https://www.omdbapi.com/?s=${peticion}&apikey=a87d8ca`);
+        const dato = await response.json();
+        if (dato.Response === 'True') {
+            coincidencias.innerHTML = dato.Search.map(peli => `
+            <div class="opciones" data-imdbid="${peli.imdbID}">
+                ${peli.Title} (${peli.Year})
+            </div>
+        `).join('');
+        } else {
+            coincidencias.innerHTML = '<p>No se encontraron resultados</p>';
+        }
+    });
+
+    coincidencias.addEventListener('click', async (event) => {
+        if (event.target.classList.contains('opciones')) {
+            const imdbID = event.target.getAttribute('data-imdbid');
+            const response = await fetch(`https://www.omdbapi.com/?i=${imdbID}&apikey=a87d8ca`);
+            const peli = await response.json();
+            if (peli.Response === 'True') {
+                infoPelis.innerHTML = `
+                <h2>${peli.Title}</h2>
+                <p><strong>Año:</strong> ${peli.Year}</p>
+                <p><strong>Género:</strong> ${peli.Genre}</p>
+                <p><strong>Director/a:</strong> ${peli.Director}</p>
+                <p><strong>Calificación en IMDb:</strong> ${peli.imdbRating}</p>
+            `;
+            } else {
+                infoPelis.innerHTML = '<p>No se encontró información detallada para esta película</p>';
+            }
+        }
+    });
+
 
     // Inicialización
     cargarLocalStorage();
